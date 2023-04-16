@@ -2521,7 +2521,8 @@ private:
   enum TentativeCXXTypeIdContext {
     TypeIdInParens,
     TypeIdUnambiguous,
-    TypeIdAsTemplateArgument
+    TypeIdAsTemplateArgument,
+    TypeIdAsGenericSelectionArgument,
   };
 
 
@@ -2537,6 +2538,20 @@ private:
   bool isTypeIdInParens() {
     bool isAmbiguous;
     return isTypeIdInParens(isAmbiguous);
+  }
+
+  /// Checks whether the current tokens form a type-id or an expression for the
+  /// purposes of use as the initial operand to a generic selection expression.
+  /// This requires special handling in C++ because it accepts either a type or
+  /// an expression, and we need to disambiguate which is which. However, we
+  /// cannot use the same logic as we've used for sizeof expressions, because
+  /// that logic relies on the operator only accepting a single argument,
+  /// whereas _Generic accepts a list of arguments.
+  bool isTypeIdForGenericSelection() {
+    bool isAmbiguous;
+    if (getLangOpts().CPlusPlus)
+      return isCXXTypeId(TypeIdAsGenericSelectionArgument, isAmbiguous);
+    return isTypeSpecifierQualifier();
   }
 
   /// Checks if the current tokens form type-id or expression.
