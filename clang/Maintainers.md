@@ -95,6 +95,11 @@ ekeane@nvidia.com (email), ErichKeane (Phabricator), [erichkeane](https://github
 Corentin Jabot \
 corentin.jabot@gmail.com (email), cor3ntin (Phabricator), [cor3ntin](https://github.com/cor3ntin) (GitHub)
 
+### Reflection
+
+Dan Katz \
+katzdm@gmail.com (email), [katzdm](https://github.com/katzdm) (GitHub), katzdm (Discord), katzdm (Discourse)
+
 ### Lambdas
 
 Corentin Jabot \
